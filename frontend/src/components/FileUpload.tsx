@@ -70,11 +70,11 @@ export const FileUpload = ({
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
-        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 cursor-pointer ${
+        className={`relative border-2 border-dashed rounded-xl p-12 text-center transition-all duration-300 cursor-pointer ${
           isDragActive
-            ? "border-blue-500 bg-blue-50"
-            : "border-gray-300 bg-gray-50 hover:border-gray-400"
-        } ${isLoading ? "opacity-50 pointer-events-none" : ""}`}
+            ? "border-blue-400 bg-blue-950/30 shadow-lg shadow-blue-500/20"
+            : "border-slate-600 bg-slate-700/30 hover:border-slate-500 hover:bg-slate-700/50"
+        } ${isLoading ? "opacity-60 pointer-events-none" : ""}`}
       >
         <input
           type="file"
@@ -86,22 +86,24 @@ export const FileUpload = ({
 
         <div className="pointer-events-none">
           {uploadedFile ? (
-            <div className="space-y-2">
-              <div className="text-green-600 text-5xl">✓</div>
-              <p className="text-sm text-gray-700 font-medium">
+            <div className="space-y-3 animate-in fade-in">
+              <div className="text-emerald-400 text-6xl animate-bounce">✓</div>
+              <p className="text-base text-slate-100 font-semibold">
                 {uploadedFile}
               </p>
-              <p className="text-xs text-gray-500">Ready for questions</p>
+              <p className="text-sm text-slate-400">Ready for your questions</p>
             </div>
           ) : (
-            <div className="space-y-2">
-              <div className="text-gray-400 text-5xl">📄</div>
-              <p className="text-sm text-gray-700 font-medium">
-                {isLoading ? "Uploading..." : "Drag and drop your file here"}
+            <div className="space-y-3">
+              <div className="text-5xl">{isLoading ? "⏳" : "📄"}</div>
+              <p className="text-base text-slate-100 font-semibold">
+                {isLoading
+                  ? "Uploading document..."
+                  : "Drag and drop your file"}
               </p>
-              <p className="text-xs text-gray-500">or click to select</p>
-              <p className="text-xs text-gray-400 mt-2">
-                PDF or TXT files only
+              <p className="text-sm text-slate-400">or click to browse</p>
+              <p className="text-xs text-slate-500 mt-3 font-medium">
+                💾 PDF or TXT files only
               </p>
             </div>
           )}

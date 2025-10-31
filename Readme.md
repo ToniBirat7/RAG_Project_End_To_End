@@ -2,6 +2,18 @@
 
 This repository contains the backend for a comprehensive Conversational RAG (Retrieval-Augmented Generation) and document ingestion system. It is built using FastAPI and provides a robust architecture for processing documents, generating embeddings, and powering a multi-turn conversational AI.
 
+## **Constraints**
+
+- We should write our own `RetrievalQAChain` i.e. `Retriever`, `Response Generator`, `Multi-turn Memory` instead of using Langchain or other frameworks.
+
+```bash
+User Query -> Compute Query Embedding -> Search Vector DB for top-k similar chunks
+    -> Collect chunks + chat memory -> Construct prompt -> Send to LLM
+    -> LLM returns answer -> Save chat in Redis -> Return answer to user
+```
+
+[Refer_To_This_For_Custom_RetrievalQAChain_Implementation](https://nakamasato.medium.com/enhancing-langchains-retrievalqa-for-real-source-links-53713c7d802a)
+
 ## Table of Contents
 
 - [Features](#features)

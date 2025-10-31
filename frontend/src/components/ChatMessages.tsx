@@ -20,10 +20,15 @@ export const ChatMessages = ({ messages, isLoading }: ChatMessagesProps) => {
   }, [messages]);
 
   return (
-    <div className="flex-1 overflow-y-auto bg-white rounded-lg p-6 space-y-4">
+    <div className="flex-1 overflow-y-auto bg-slate-800/50 rounded-t-2xl p-6 space-y-4 scroll-smooth">
       {messages.length === 0 ? (
-        <div className="flex items-center justify-center h-full text-gray-400">
-          <p>No messages yet. Upload a file to get started!</p>
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center">
+            <p className="text-3xl mb-2">💬</p>
+            <p className="text-slate-400 font-medium">
+              Upload a file to start the conversation
+            </p>
+          </div>
         </div>
       ) : (
         messages.map((message) => (
@@ -31,19 +36,23 @@ export const ChatMessages = ({ messages, isLoading }: ChatMessagesProps) => {
             key={message.id}
             className={`flex ${
               message.sender === "user" ? "justify-end" : "justify-start"
-            }`}
+            } animate-in fade-in slide-in-from-bottom-2 duration-300`}
           >
             <div
-              className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+              className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
                 message.sender === "user"
-                  ? "bg-blue-600 text-white rounded-br-none"
-                  : "bg-gray-200 text-gray-900 rounded-bl-none"
+                  ? "bg-blue-600 text-slate-50 rounded-br-none shadow-lg shadow-blue-600/20"
+                  : "bg-slate-700 text-slate-100 rounded-bl-none shadow-lg shadow-slate-900/20 border border-slate-600"
               }`}
             >
-              <p className="text-sm break-words">{message.text}</p>
+              <p className="text-sm break-all leading-relaxed font-medium">
+                {message.text}
+              </p>
               <span
-                className={`text-xs mt-1 block ${
-                  message.sender === "user" ? "text-blue-100" : "text-gray-500"
+                className={`text-xs mt-2 block font-medium ${
+                  message.sender === "user"
+                    ? "text-blue-100/70"
+                    : "text-slate-400"
                 }`}
               >
                 {message.timestamp.toLocaleTimeString([], {
@@ -57,12 +66,12 @@ export const ChatMessages = ({ messages, isLoading }: ChatMessagesProps) => {
       )}
 
       {isLoading && (
-        <div className="flex justify-start">
-          <div className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg rounded-bl-none">
+        <div className="flex justify-start animate-in fade-in duration-300">
+          <div className="bg-slate-700 text-slate-100 px-4 py-3 rounded-2xl rounded-bl-none border border-slate-600 shadow-lg shadow-slate-900/20">
             <div className="flex space-x-2">
-              <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
-              <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-100"></div>
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-200"></div>
             </div>
           </div>
         </div>
